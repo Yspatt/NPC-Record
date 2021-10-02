@@ -21,8 +21,8 @@ public class Item {
         this.meta = stack.getItemMeta();
     }
 
-    public Item(Material material) {
-        this.stack = new ItemStack(material);
+    public Item(XMaterial material) {
+        this.stack = material.parseItem();
         this.meta = stack.getItemMeta();
     }
 

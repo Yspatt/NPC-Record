@@ -1,12 +1,12 @@
 package com.yan.minecraft.npc.inventory;
 
 import com.yan.minecraft.npc.util.item.Item;
+import com.yan.minecraft.npc.util.item.XMaterial;
 import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class ConfirmInventoryProvider implements InventoryProvider {
@@ -31,12 +31,12 @@ public class ConfirmInventoryProvider implements InventoryProvider {
     @Override
     public void init(Player player, InventoryContents inventoryContents) {
 
-        inventoryContents.set(1, 4, ClickableItem.of(new Item(Material.GREEN_WOOL).name(ChatColor.GREEN + "CONFIRM").build(), action -> {
+        inventoryContents.set(1, 4, ClickableItem.of(new Item(XMaterial.GREEN_WOOL).name(ChatColor.GREEN + "CONFIRM").build(), action -> {
             confirm.run();
             player.closeInventory();
         }));
 
-        inventoryContents.set(1, 6, ClickableItem.of(new Item(Material.RED_WOOL).name(ChatColor.RED + "CANCEL").build(), action -> {
+        inventoryContents.set(1, 6, ClickableItem.of(new Item(XMaterial.RED_WOOL).name(ChatColor.RED + "CANCEL").build(), action -> {
             cancel.run();
             player.closeInventory();
         }));

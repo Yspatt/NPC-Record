@@ -1,8 +1,10 @@
 package com.yan.minecraft.npc.helpers;
 
+import com.yan.minecraft.npc.data.npc.NPC_1_12_R1;
+import com.yan.minecraft.npc.data.npc.NPC_1_15_R1;
+import com.yan.minecraft.npc.data.npc.NPC_1_8_R1;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -84,7 +86,12 @@ public abstract class CorePlugin extends JavaPlugin {
 
     public void commands(Plugin plugin, Command... commands) {
         for (Command command : commands) {
-            ((CraftServer) plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(), command);
+            switch (serverVersion) {
+                case "v1_17_R1" ->  ((org.bukkit.craftbukkit.v1_17_R1.CraftServer) plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(), command);
+                case "v1_15_R1" -> ((org.bukkit.craftbukkit.v1_15_R1.CraftServer) plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(), command);
+                case "v1_12_R1" -> ((org.bukkit.craftbukkit.v1_12_R1.CraftServer) plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(), command);
+                case "v1_8_R1" -> ((org.bukkit.craftbukkit.v1_8_R1.CraftServer) plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(), command);
+            }
         }
     }
 
