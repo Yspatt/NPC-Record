@@ -25,8 +25,8 @@ public class NpcService implements Service {
 
      */
 
-    public MasterFile data = new MasterFile(NPCPlugin.getInstance(),"data.yml");
-    public Gson gson = new GsonBuilder().registerTypeAdapter(Location.class,new LocationAdapter()).create();
+    public MasterFile data = new MasterFile(NPCPlugin.getInstance(), "data.yml");
+    public Gson gson = new GsonBuilder().registerTypeAdapter(Location.class, new LocationAdapter()).create();
 
     @Override
     public void init() {
@@ -42,7 +42,7 @@ public class NpcService implements Service {
                 );
                 List<String> frames = data.getStringList("npc." + uuid + ".frames");
                 for (String frame : frames) {
-                    npc.frames().add(gson.fromJson(frame,Frame.class));
+                    npc.frames().add(gson.fromJson(frame, Frame.class));
                 }
             }
         }
@@ -55,15 +55,15 @@ public class NpcService implements Service {
 
     @Override
     public void stop() {
-        NPCPlugin.getInstance().getNpcController().npcList.forEach(npc ->{
-            data.set("npc." + npc.uuid() + ".name",npc.name());
-            data.set("npc." + npc.uuid() + ".skin",npc.skin());
-            data.setLocation("npc." + npc.uuid() + ".location",npc.location());
+        NPCPlugin.getInstance().getNpcController().npcList.forEach(npc -> {
+            data.set("npc." + npc.uuid() + ".name", npc.name());
+            data.set("npc." + npc.uuid() + ".skin", npc.skin());
+            data.setLocation("npc." + npc.uuid() + ".location", npc.location());
             List<String> serializer = Lists.newArrayList();
             for (Frame frame : npc.frames()) {
-                serializer.add(gson.toJson(frame,Frame.class));
+                serializer.add(gson.toJson(frame, Frame.class));
             }
-            data.set("npc." + npc.uuid() + ".frames",serializer);
+            data.set("npc." + npc.uuid() + ".frames", serializer);
         });
         data.save();
     }

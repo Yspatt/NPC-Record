@@ -9,8 +9,10 @@ public class Frame {
     public Location location;
     public FrameAction action;
 
-    public Frame(Location location,FrameAction action){
+    public Frame(Location location, FrameAction action) {
+
         this.location = location;
         this.action = action;
+
     }
 }

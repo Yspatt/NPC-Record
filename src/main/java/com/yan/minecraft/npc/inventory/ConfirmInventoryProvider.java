@@ -14,9 +14,11 @@ public class ConfirmInventoryProvider implements InventoryProvider {
     private Runnable confirm;
     private Runnable cancel;
 
-    public final SmartInventory doInventory(Runnable confirm,Runnable cancel){
+    public final SmartInventory doInventory(Runnable confirm, Runnable cancel) {
+
         this.confirm = confirm;
         this.cancel = cancel;
+
         return SmartInventory.builder()
                 .id("confirmInventory")
                 .provider(new ConfirmInventoryProvider())
@@ -28,11 +30,13 @@ public class ConfirmInventoryProvider implements InventoryProvider {
 
     @Override
     public void init(Player player, InventoryContents inventoryContents) {
-        inventoryContents.set(1,4, ClickableItem.of(new Item(Material.GREEN_WOOL).name(ChatColor.GREEN + "CONFIRM").build(), action ->{
+
+        inventoryContents.set(1, 4, ClickableItem.of(new Item(Material.GREEN_WOOL).name(ChatColor.GREEN + "CONFIRM").build(), action -> {
             confirm.run();
             player.closeInventory();
         }));
-        inventoryContents.set(1,6, ClickableItem.of(new Item(Material.RED_WOOL).name(ChatColor.RED + "CANCEL").build(), action ->{
+
+        inventoryContents.set(1, 6, ClickableItem.of(new Item(Material.RED_WOOL).name(ChatColor.RED + "CANCEL").build(), action -> {
             cancel.run();
             player.closeInventory();
         }));

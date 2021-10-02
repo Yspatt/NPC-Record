@@ -11,7 +11,7 @@ public class LocationAdapter implements JsonSerializer<Location>, JsonDeserializ
     public JsonElement serialize(Location location, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject jsonObject = new JsonObject();
 
-        if(location != null && location.getWorld() != null) {
+        if (location != null && location.getWorld() != null) {
             jsonObject.add("location", new JsonPrimitive(LocationUtils.toStringExact(location)));
         }
         return jsonObject;

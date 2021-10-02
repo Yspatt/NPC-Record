@@ -6,6 +6,8 @@ import java.util.UUID;
 public interface Service {
 
     void init();
+
     void load();
+
     void stop();
 }

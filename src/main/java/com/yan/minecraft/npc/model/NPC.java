@@ -8,20 +8,27 @@ import java.util.UUID;
 
 public interface NPC {
 
-     String name();
-     String skin();
-     Location location();
-     UUID uuid();
-     List<Frame> frames();
+    String name();
 
-     void create(String name,String skin,Location location,UUID uuid);
+    String skin();
 
+    Location location();
+
+    UUID uuid();
+
+    List<Frame> frames();
+
+    void create(String name, String skin, Location location, UUID uuid);
 
 
     void spawn();
+
     void destroy();
-    void walk(Frame record,Frame oldRecord);
+
+    void walk(Frame record, Frame oldRecord);
+
     void sneak(boolean b);
+
     void hit();
 
 

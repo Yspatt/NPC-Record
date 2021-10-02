@@ -26,11 +26,14 @@ import java.util.UUID;
 public class NpcController {
 
     public List<NPC> npcList = Lists.newArrayList();
-    public Map<Player,NPC> recordings = Maps.newHashMap();
+    public Map<Player, NPC> recordings = Maps.newHashMap();
 
 
-    public Optional<NPC> get(String name) {return npcList.stream().filter(npc -> npc.name().equalsIgnoreCase(name)).findFirst();}
-    public void delete(String name){
+    public Optional<NPC> get(String name) {
+        return npcList.stream().filter(npc -> npc.name().equalsIgnoreCase(name)).findFirst();
+    }
+
+    public void delete(String name) {
         npcList.remove(get(name).orElse(null));
     }
 
@@ -55,32 +58,33 @@ public class NpcController {
     }
 
 
-    public void replay(NPC npc){
-            new BukkitRunnable(){
-                int index = 1;
-                @Override
-                public void run() {
-                    if (index >= npc.frames().size()-1){
-                        npc.destroy();
-                        cancel();
-                    }
-                    Frame record = npc.frames().get(index);
-                    Frame oldRecord = npc.frames().get(index-1);
+    public void replay(NPC npc) {
+        new BukkitRunnable() {
+            int index = 1;
 
-                    npc.walk(record,oldRecord);
-
-                    if (record.getAction() == FrameAction.HIT){
-                        npc.hit();
-                    }
-                    if (record.getAction() == FrameAction.SNEAK_ON){
-                        npc.sneak(true);
-                    }
-                    if (record.getAction() == FrameAction.SNEAK_OFF){
-                        npc.sneak(false);
-                    }
-                    index++;
+            @Override
+            public void run() {
+                if (index >= npc.frames().size() - 1) {
+                    npc.destroy();
+                    cancel();
                 }
-            }.runTaskTimer(NPCPlugin.getInstance(),0,0);
+                Frame record = npc.frames().get(index);
+                Frame oldRecord = npc.frames().get(index - 1);
+
+                npc.walk(record, oldRecord);
+
+                if (record.getAction() == FrameAction.HIT) {
+                    npc.hit();
+                }
+                if (record.getAction() == FrameAction.SNEAK_ON) {
+                    npc.sneak(true);
+                }
+                if (record.getAction() == FrameAction.SNEAK_OFF) {
+                    npc.sneak(false);
+                }
+                index++;
+            }
+        }.runTaskTimer(NPCPlugin.getInstance(), 0, 0);
     }
 
 
@@ -96,7 +100,7 @@ public class NpcController {
             String texture = textureProperty.get("value").getAsString();
             String signature = textureProperty.get("signature").getAsString();
 
-            return new String[] {texture, signature};
+            return new String[]{texture, signature};
         } catch (IOException e) {
             System.err.println("Could not get skin data from session servers!");
             e.printStackTrace();

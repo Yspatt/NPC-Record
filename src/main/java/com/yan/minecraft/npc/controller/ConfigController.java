@@ -12,16 +12,16 @@ import java.util.HashMap;
 @Getter
 public class ConfigController {
 
-    public MasterFile config = new MasterFile(NPCPlugin.getInstance(),"config.yml");
-    public HashMap<String,String> cachedValues = Maps.newHashMap();
+    public MasterFile config = new MasterFile(NPCPlugin.getInstance(), "config.yml");
+    public HashMap<String, String> cachedValues = Maps.newHashMap();
 
 
-    public void loadCache(){
+    public void loadCache() {
         ConfigurationSection section = config.getConfigurationSection("");
-        if (section != null){
+        if (section != null) {
             for (String key : section.getKeys(true)) {
                 System.out.println(key);
-                cachedValues.put(key, ChatColor.translateAlternateColorCodes('&',config.getString(key).replace("{break}","\n")));
+                cachedValues.put(key, ChatColor.translateAlternateColorCodes('&', config.getString(key).replace("{break}", "\n")));
             }
         }
         System.out.println(cachedValues);

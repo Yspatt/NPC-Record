@@ -6,7 +6,7 @@ import org.bukkit.Location;
 public class LocationUtils {
 
     public static String prettify(Location location) {
-        if(location == null || location.getWorld() == null)
+        if (location == null || location.getWorld() == null)
             return "invalid";
 
         return location.getWorld().getName() + " " + location.getBlockX() + " " + location.getBlockY() + " " + location.getBlockZ();
@@ -21,7 +21,7 @@ public class LocationUtils {
     }
 
     public static Location toLocationExact(String string) {
-        if(string.isEmpty()) return null;
+        if (string.isEmpty()) return null;
 
         String[] split = string.split(";");
 

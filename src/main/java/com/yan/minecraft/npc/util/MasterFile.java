@@ -5,7 +5,9 @@ import com.google.common.io.Files;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.*;
 import org.bukkit.configuration.file.*;
+
 import java.io.*;
+
 import org.bukkit.configuration.*;
 import org.bukkit.*;
 
@@ -33,14 +35,14 @@ public class MasterFile {
 
         new File(plugin.getDataFolder() + (folder == null ? "" : File.separator + folder)).mkdirs();
 
-        if(folder == null) {
+        if (folder == null) {
             this.file = new File(plugin.getDataFolder(), fileName.isEmpty() ? "config.yml" : fileName);
         } else {
             this.file = new File(plugin.getDataFolder(), fileName.isEmpty() ? "config.yml" : folder + File.separator + fileName);
         }
 
-        try{
-            if(!file.exists()) {
+        try {
+            if (!file.exists()) {
                 if (folder == null) {
                     plugin.saveResource(fileName, false);
                 } else {
@@ -51,7 +53,7 @@ public class MasterFile {
             }
             this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
             this.fileConfiguration.loadFromString(Files.toString(file, Charset.forName("UTF-8")));
-        }catch(IOException | InvalidConfigurationException exception) {
+        } catch (IOException | InvalidConfigurationException exception) {
             exception.printStackTrace();
         }
     }
@@ -75,11 +77,11 @@ public class MasterFile {
     }
 
     public int getInt(final String path) {
-        return (int) this.get(path,0);
+        return (int) this.get(path, 0);
     }
 
     public List<?> getList(final String path) {
-        return (List<?>)this.get(path, Lists.newArrayList());
+        return (List<?>) this.get(path, Lists.newArrayList());
     }
 
     public List<String> getStringList(final String path) {
@@ -90,7 +92,7 @@ public class MasterFile {
         return list;
     }
 
-    public EntityType getEntityType(final String path){
+    public EntityType getEntityType(final String path) {
         return EntityType.valueOf(getString(path));
     }
 
@@ -103,11 +105,11 @@ public class MasterFile {
     }
 
     public List<Integer> getIntegetList(final String path) {
-        return (List<Integer>)this.get(path, Lists.newArrayList());
+        return (List<Integer>) this.get(path, Lists.newArrayList());
     }
 
     public List<Double> getDoubleList(final String path) {
-        return (List<Double>)this.get(path,Lists.newArrayList());
+        return (List<Double>) this.get(path, Lists.newArrayList());
     }
 
     public List<Float> getFloatList(final String path) {
@@ -131,7 +133,7 @@ public class MasterFile {
     }
 
     public void setLocation(String path, Location location) {
-        if(location == null) {
+        if (location == null) {
             this.set(path, null);
             return;
         }
@@ -142,7 +144,7 @@ public class MasterFile {
     public Location getLocation(String path) {
         String locationString = (String) this.get(path, null);
 
-        if(locationString == null) {
+        if (locationString == null) {
             return null;
         }
 
@@ -161,8 +163,7 @@ public class MasterFile {
     public void save() {
         try {
             this.fileConfiguration.save(this.file);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

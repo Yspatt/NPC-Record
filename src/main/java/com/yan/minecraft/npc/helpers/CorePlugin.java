@@ -32,7 +32,7 @@ public abstract class CorePlugin extends JavaPlugin {
     public void onDisable() {
         try {
             disable();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -43,10 +43,12 @@ public abstract class CorePlugin extends JavaPlugin {
     }
 
     public abstract void enable();
+
     public abstract void disable() throws SQLException;
+
     public abstract void load();
 
-    public List<RegisteredServiceProvider<?>> getServices(){
+    public List<RegisteredServiceProvider<?>> getServices() {
         return Bukkit.getServicesManager().getRegistrations(this);
     }
 
@@ -74,14 +76,15 @@ public abstract class CorePlugin extends JavaPlugin {
         return instance;
     }
 
-    public void listeners(Plugin plugin, Listener... listeners){
-        for (Listener listener : listeners){
-            plugin.getServer().getPluginManager().registerEvents(listener,plugin);
+    public void listeners(Plugin plugin, Listener... listeners) {
+        for (Listener listener : listeners) {
+            plugin.getServer().getPluginManager().registerEvents(listener, plugin);
         }
     }
-    public void commands(Plugin plugin, Command... commands){
-        for (Command command : commands){
-            ((CraftServer)plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(),command);
+
+    public void commands(Plugin plugin, Command... commands) {
+        for (Command command : commands) {
+            ((CraftServer) plugin.getServer()).getCommandMap().register(plugin.getName().toLowerCase(), command);
         }
     }
 

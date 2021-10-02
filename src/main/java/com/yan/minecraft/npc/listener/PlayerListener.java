@@ -16,18 +16,20 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     private void move(PlayerMoveEvent event) {
-        if (npcController.recordings.containsKey(event.getPlayer())){
+        if (npcController.recordings.containsKey(event.getPlayer())) {
             npcController.recordings.get(event.getPlayer()).frames().add(new Frame(event.getPlayer().getLocation(), FrameAction.WALK));
         }
     }
+
     @EventHandler
-    private void hit(PlayerInteractEvent event){
-        if (npcController.recordings.containsKey(event.getPlayer())){
+    private void hit(PlayerInteractEvent event) {
+        if (npcController.recordings.containsKey(event.getPlayer())) {
             npcController.recordings.get(event.getPlayer()).frames().add(new Frame(event.getPlayer().getLocation(), FrameAction.HIT));
         }
     }
+
     @EventHandler
-    private void sneak(PlayerToggleSneakEvent event){
+    private void sneak(PlayerToggleSneakEvent event) {
         if (npcController.recordings.containsKey(event.getPlayer())) {
             if (event.isSneaking()) {
                 npcController.recordings.get(event.getPlayer()).frames().add(new Frame(event.getPlayer().getLocation(), FrameAction.SNEAK_ON));

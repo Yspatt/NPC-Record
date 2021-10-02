@@ -73,17 +73,17 @@ public class NPC_1_17_R1 implements NPC {
         MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
 
         WorldServer worldServer = ((CraftWorld) location.getWorld()).getHandle();
-        GameProfile gameProfile = new GameProfile(uuid,name);
+        GameProfile gameProfile = new GameProfile(uuid, name);
         String[] a = NPCPlugin.getInstance().getNpcController().getNpcSkin(skin);
         gameProfile.getProperties().put("textures", new Property("textures", a[0], a[1]));
         entityPlayer = new CustomPlayer_1_17_R1(nmsServer, worldServer, gameProfile);
 
-        entityPlayer.setLocation(frames.get(0).getLocation().getX(),frames.get(0).getLocation().getY(),frames.get(0).getLocation().getZ(),frames.get(0).getLocation().getYaw(),frames.get(0).getLocation().getPitch());
+        entityPlayer.setLocation(frames.get(0).getLocation().getX(), frames.get(0).getLocation().getY(), frames.get(0).getLocation().getZ(), frames.get(0).getLocation().getYaw(), frames.get(0).getLocation().getPitch());
 
         Bukkit.getOnlinePlayers().forEach(player -> {
-            CraftPlayer craftPlayer = ((CraftPlayer)player);
+            CraftPlayer craftPlayer = ((CraftPlayer) player);
             PacketPlayOutPlayerInfo addPlayerPacket = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, entityPlayer);
-            PacketPlayOutPlayerInfo removePlayerPacket = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.b,entityPlayer);
+            PacketPlayOutPlayerInfo removePlayerPacket = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.b, entityPlayer);
             PacketPlayOutNamedEntitySpawn spawnPlayerPacket = new PacketPlayOutNamedEntitySpawn(entityPlayer);
             craftPlayer.getHandle().b.sendPacket(addPlayerPacket);
             craftPlayer.getHandle().b.sendPacket(spawnPlayerPacket);
@@ -95,20 +95,20 @@ public class NPC_1_17_R1 implements NPC {
     public void destroy() {
         PacketPlayOutEntityDestroy destroy = new PacketPlayOutEntityDestroy(entityPlayer.getId());
         Bukkit.getOnlinePlayers().forEach(player -> {
-            CraftPlayer craftPlayer = ((CraftPlayer)player);
+            CraftPlayer craftPlayer = ((CraftPlayer) player);
             craftPlayer.getHandle().b.sendPacket(destroy);
         });
     }
 
     @Override
-    public void walk(Frame record,Frame oldrecord) {
-        short x = (short) ((record.getLocation().getX() * 32 - oldrecord.getLocation().getX() *32) *128);
-        short y = (short) ((record.getLocation().getY() * 32 - oldrecord.getLocation().getY() *32) *128);
-        short z = (short) ((record.getLocation().getZ() * 32 - oldrecord.getLocation().getZ() *32) *128);
-        PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook packet = new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(entityPlayer.getId(),x,y,z,(byte)record.getLocation().getYaw(),(byte)record.getLocation().getPitch(),true);
-        PacketPlayOutEntityHeadRotation rotation = new PacketPlayOutEntityHeadRotation(entityPlayer,(byte)record.getLocation().getYaw());
+    public void walk(Frame record, Frame oldrecord) {
+        short x = (short) ((record.getLocation().getX() * 32 - oldrecord.getLocation().getX() * 32) * 128);
+        short y = (short) ((record.getLocation().getY() * 32 - oldrecord.getLocation().getY() * 32) * 128);
+        short z = (short) ((record.getLocation().getZ() * 32 - oldrecord.getLocation().getZ() * 32) * 128);
+        PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook packet = new PacketPlayOutEntity.PacketPlayOutRelEntityMoveLook(entityPlayer.getId(), x, y, z, (byte) record.getLocation().getYaw(), (byte) record.getLocation().getPitch(), true);
+        PacketPlayOutEntityHeadRotation rotation = new PacketPlayOutEntityHeadRotation(entityPlayer, (byte) record.getLocation().getYaw());
         for (Player player : Bukkit.getOnlinePlayers()) {
-            CraftPlayer craftPlayer = ((CraftPlayer)player);
+            CraftPlayer craftPlayer = ((CraftPlayer) player);
             craftPlayer.getHandle().b.sendPacket(packet);
             craftPlayer.getHandle().b.sendPacket(rotation);
         }
@@ -118,18 +118,18 @@ public class NPC_1_17_R1 implements NPC {
     public void sneak(boolean b) {
         DataWatcher dw = new DataWatcher(entityPlayer);
         dw.register(new DataWatcherObject<>(6, DataWatcherRegistry.s), (b ? EntityPose.f : EntityPose.a));
-        PacketPlayOutEntityMetadata metadata = new PacketPlayOutEntityMetadata(entityPlayer.getId(),dw,true);
+        PacketPlayOutEntityMetadata metadata = new PacketPlayOutEntityMetadata(entityPlayer.getId(), dw, true);
         Bukkit.getOnlinePlayers().forEach(player -> {
-            CraftPlayer craftPlayer = ((CraftPlayer)player);
+            CraftPlayer craftPlayer = ((CraftPlayer) player);
             craftPlayer.getHandle().b.sendPacket(metadata);
         });
     }
 
     @Override
     public void hit() {
-        PacketPlayOutAnimation animation = new PacketPlayOutAnimation(entityPlayer,0);
+        PacketPlayOutAnimation animation = new PacketPlayOutAnimation(entityPlayer, 0);
         Bukkit.getOnlinePlayers().forEach(player -> {
-            CraftPlayer craftPlayer = ((CraftPlayer)player);
+            CraftPlayer craftPlayer = ((CraftPlayer) player);
             craftPlayer.getHandle().b.sendPacket(animation);
         });
     }

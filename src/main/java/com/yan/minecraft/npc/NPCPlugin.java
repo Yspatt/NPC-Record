@@ -34,8 +34,8 @@ public class NPCPlugin extends CorePlugin {
 
         confirmInventoryProvider = new ConfirmInventoryProvider();
 
-        listeners(this,new PlayerListener());
-        commands(this,new NpcCommand());
+        listeners(this, new PlayerListener());
+        commands(this, new NpcCommand());
 
     }
 
@@ -47,7 +47,8 @@ public class NPCPlugin extends CorePlugin {
     @Override
     public void load() {
     }
-    public static NPCPlugin getInstance(){
+
+    public static NPCPlugin getInstance() {
         return NPCPlugin.getPlugin(NPCPlugin.class);
     }
 
