@@ -1,0 +1,20 @@
+npc-no-permission: '&c[NPC] You dont have permission to use that!'
+
+npc-command-operation-cancel: '&c[NPC] Operation cancelled'
+
+npc-command-help: '&c[NPC] Use: /npc (create/rec/play/delete) (npc) (any)'
+npc-command-create-help: '&c[NPC] Use: /npc create (name) (skin)'
+npc-command-create-created: '&a[NPC] Successfully created npc &f{name}! {break} &a> Use /npc rec (name) (seconds) to make a new record!'
+npc-command-create-already-exists: '&c[NPC] Has a another NPC with same name!'
+
+npc-command-rec-help: '&c[NPC] Use: /npc rec (name) (seconds)'
+npc-command-rec-warning: '&e[NPC] Your recording will start in 3 seconds...'
+npc-command-rec-recording: '&a[NPC] Recording... &f{time} seconds &aelapsed...'
+npc-command-rec-stop: '&a[NPC] Recording ended successfully. Use /npc play (npc) to view your recording'
+
+npc-command-delete-help: '&c[NPC] Use: /npc delete (npc)'
+npc-command-delete-not-exists: '&c[NPC] There is no npc with this name!'
+npc-command-delete-deleted: '&a[NPC] Successfully deleted npc &f{name}&a!'
+
+npc-command-play-help: '&c[NPC] Use: /npc play (name)'
+npc-command-play-playing: '&a[NPC] Playing record from &f{name}&a...'

@@ -1,0 +1,6 @@
+name: Npc
+version: ${project.version}
+main: com.yan.minecraft.npc.NPCPlugin
+prefix: NPC
+authors: [Yspatt]
+description: Npc plugin

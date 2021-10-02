@@ -1,0 +1,11 @@
+
+npc-command-help: '&c[NPC] Use: /npc (create/rec/play/delete) (npc) (any)'
+npc-command-create-help: '&c[NPC] Use: /npc create (name) (skin)'
+npc-command-create-created: '&a[NPC] Successfully created npc &f{name}! {break} &a> Use /npc rec (name) (seconds) to make a new record!'
+
+npc-command-rec-help: '&c[NPC] Use: /npc rec (name) (seconds)'
+npc-command-rec-warning: '&e[NPC] Your recording will start in 3 seconds...'
+npc-command-rec-recording: '&a[NPC] Recording... &f{time} seconds &aelapsed...'
+npc-command-rec-stop: '&a[NPC] Recording ended successfully. Use /npc play (npc) to view your recording'
+
+npc-command-play-help: '&c[NPC] Use: /npc play (name)'
