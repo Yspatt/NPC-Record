@@ -14,7 +14,6 @@ public class LocationAdapter implements JsonSerializer<Location>, JsonDeserializ
         if(location != null && location.getWorld() != null) {
             jsonObject.add("location", new JsonPrimitive(LocationUtils.toStringExact(location)));
         }
-
         return jsonObject;
     }
 
